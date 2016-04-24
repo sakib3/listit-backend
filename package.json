@@ -1,0 +1,24 @@
+{
+  "name": "listit-backend",
+  "version": "1.0.0",
+  "description": "Node.js based listit backend api.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sakib3/listit-backend.git"
+  },
+  "dependencies": {
+    "express": "*",
+    "body-parser": "*",
+    "mongoose": "*"
+  },
+  "author": "Sabbir Rahman Sakib",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sakib3/listit-backend/issues"
+  },
+  "homepage": "https://github.com/sakib3/listit-backend#readme"
+}
