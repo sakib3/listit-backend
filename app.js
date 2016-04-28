@@ -3,6 +3,9 @@ var app = express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 
+//initialize body parser
+app.use(bodyParser.json());
+
 Employee = require('./models/employee');
 Company = require('./models/company');
 Order = require('./models/order');
@@ -19,16 +22,28 @@ app.get('/', function(req, res){
 app.get('/api/employees', function(req, res){
 	Employee.getEmployees(function(err, employees){
 		if(err){
-			throw err;
+			res.json(err);
 		}
 		res.json(employees);
+	});
+});
+
+app.post('/api/employees', function(req, res){
+	//get post data
+	var employee = req.body;
+	console.log(employee);
+	Employee.addEmployee(employee, function(err, employee){
+		if(err){
+			res.json(err);
+		}
+		res.json(employee);
 	});
 });
 
 app.get('/api/employees/:_id', function(req, res){
 	Employee.getEmployeeById(req.params._id,function(err, employee){
 		if(err){
-			throw err;
+			res.json(err);
 		}
 		res.json(employee);
 	});
@@ -37,7 +52,7 @@ app.get('/api/employees/:_id', function(req, res){
 app.get('/api/companies', function(req, res){
 	Company.getCompanies(function(err, companies){
 		if(err){
-			throw err;
+			res.json(err);
 		}
 		res.json(companies);
 	});
@@ -46,7 +61,7 @@ app.get('/api/companies', function(req, res){
 app.get('/api/orders', function(req, res){
 	Order.getOrders(function(err, orders){
 		if(err){
-			throw err;
+			res.json(err);
 		}
 		res.json(orders);
 	});
@@ -55,7 +70,7 @@ app.get('/api/orders', function(req, res){
 app.get('/api/products', function(req, res){
 	Product.getProducts(function(err, products){
 		if(err){
-			throw err;
+			res.json(err);
 		}
 		res.json(products);
 	});
