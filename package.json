@@ -11,9 +11,17 @@
     "url": "git+https://github.com/sakib3/listit-backend.git"
   },
   "dependencies": {
-    "express": "*",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "*",
-    "mongoose": "*"
+    "connect-flash": "^0.1.1",
+    "express": "*",
+    "express-session": "^1.13.0",
+    "jsonwebtoken": "^7.1.6",
+    "jwt-simple": "^0.5.0",
+    "moment": "^2.14.1",
+    "mongoose": "*",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0"
   },
   "author": "Sabbir Rahman Sakib",
   "license": "ISC",

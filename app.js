@@ -1,16 +1,16 @@
-var express = require('express');
-var app = express();
-
-var bodyParser = require('body-parser');
+var express = require('express'),
+app = express(),
+bodyParser = require('body-parser'),
+passport = require('passport'),
+session = require('express-session'),
+secret = require('./secret'),
 router = require('./routes.js');
 
-//initialize body parser
 app.use(bodyParser.json());
-
-
-
+app.set('jwtTokenSecret', secret.jwtTokenSecret);
+app.use(passport.initialize());
+app.use(passport.session(false));
 app.use("/",router);
-
 app.use("*",function(req,res){
 	res.status(400).send({ error: 'Not found' });
 });

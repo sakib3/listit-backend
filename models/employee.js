@@ -1,4 +1,6 @@
 var mongoose = require('mongoose'),
+	bcrypt = require('bcrypt-nodejs'),
+	SALT_WORK_FACTOR = 10,
 	Schema = mongoose.Schema;
 
 // Employee Schema
@@ -15,6 +17,29 @@ var employeeSchema = Schema({
 	createdAt: { type: Date, default: Date.now },
 	updatedAt: { type: Date, default: Date.now },
 	companies: [ { type: Schema.Types.ObjectId, ref: 'Company' } ]
+});
+
+
+//Before saving Employee perform additional task like hash password
+employeeSchema.pre('save', function(next) {
+    var employee = this;
+
+    // only hash the password if it has been modified (or is new)
+    if (!employee.isModified('password')) return next();
+
+    // generate a salt
+    bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
+        if (err) return next(err);
+
+        // hash the password using our new salt
+        bcrypt.hash(employee.password, salt, null, function(err, hash) {
+            if (err) return next(err);
+
+            // override the cleartext password with the hashed one
+            employee.password = hash;
+            next();
+        });
+    });
 });
 
 var Employee = module.exports = mongoose.model('Employee', employeeSchema, 'employee');
@@ -36,7 +61,14 @@ module.exports.addEmployee = function(employee, callback){
 	Employee.create(employee, callback);
 }
 
+module.exports.getUserByUsername = function(username, callback){
+	var query = {email: username};
+	Employee.findOne(query, callback);
+}
 
-
-//curl -X POST -d '{"email":"sakib34@gmail.com","password":"12323","companies":[{"_id":"571abcd9830cc1dc0fa44fa0"},{"_id": "571abd0b830cc1dc0fa44fa1"}]}' http://localhost:3000/api/employees/ --header "Content-Type:application/json"
-
+module.exports.comparePassword = function(candidatePassword, hash, callback){
+	bcrypt.compare(candidatePassword, hash, function(err, isMatch) {
+    	if(err) throw err;
+    	callback(null, isMatch);
+	});
+}
