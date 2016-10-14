@@ -13,7 +13,7 @@ $ curl -X POST -d '{"email":"sakib3@gmail.com","password":"123456"}' http://loca
 ```
 Get Employees:
 ```sh
-$ curl -H "content-type:application/json" -H "x-access-token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NzFhYmUyMTgzMGNjMWRjMGZhNDRmYTIiLCJleHAiOjE0Njk5ODY1OTg1NDZ9.Jqo_2JU7G5PkdpMl0zssP4Ej1ZjXUw1jcAplMr8l86c" -X GET http://localhost:3000/api/employees/
+$ curl -H "content-type:application/json" -H "x-access-token:eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1NzFhYmUyMTgzMGNjMWRjMGZhNDRmYTIiLCJleHAiOjE0Njk5ODY1OTg1NDZ9.Jqo_2JU7G5PkdpMl0zssP4Ej1ZjXUw1jcAplMr8l86c" -X POST http://localhost:3000/api/employees/
 ```
 Create New Product:
 ```sh

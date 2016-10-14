@@ -4,7 +4,8 @@ bodyParser = require('body-parser'),
 passport = require('passport'),
 session = require('express-session'),
 secret = require('./secret'),
-router = require('./routes.js');
+router = require('./routes.js'),
+config = require('./_config');
 
 app.use(bodyParser.json());
 app.set('jwtTokenSecret', secret.jwtTokenSecret);
@@ -14,6 +15,7 @@ app.use("/",router);
 app.use("*",function(req,res){
 	res.status(400).send({ error: 'Not found' });
 });
+var port = config.serverPORT[process.env.NODE_ENV];
 
-app.listen(3000);
-console.log('Running on port 3000 ....');
+app.listen(port);
+console.log('Running on port '+ port+' ....');

@@ -30,7 +30,7 @@ module.exports.decodeToken = function(req, res, next) {
                 "error": 'Access token has expired'
               });
             }
-            req.decoded = decoded;
+            req._currentIdentifierFromToken = decoded;
             return next();
 
         } catch (err) {
