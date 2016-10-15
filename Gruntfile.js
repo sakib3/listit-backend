@@ -27,6 +27,12 @@ module.exports = function(grunt) {
             node_env: 'test',
             script: 'test/prepareDbForTest.js'
           }
+        },
+        createAdminTest:{
+          options: {
+            node_env: 'test',
+            script: 'test/createAdmin.js'
+          }
         }
     },
     watch: {
@@ -72,5 +78,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-wait');
   //grunt.registerTask('development', ['express:development','watch']);
-  grunt.registerTask('test', ['express:preTest','wait:pause','express:test','mochaTest:test']);
+  grunt.registerTask('test', ['express:preTest','wait:pause','express:createAdminTest','wait:pause','express:test','mochaTest:test']);
 };
