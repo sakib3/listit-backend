@@ -12,3 +12,12 @@ MongoClient.connect(url, {native_parser:true},function(err, db){
           db.close();
         });
 });
+
+MongoClient.connect(url, {native_parser:true},function(err, db){
+        // Drop the collection from this world
+        console.log(db);
+        db.dropCollection("admin", function(err, result) {
+          console.log("admin collection is deleting...");
+          db.close();
+        });
+});
