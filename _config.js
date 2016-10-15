@@ -2,7 +2,7 @@ var config = {};
 
 config.mongoURI = {
   development: 'mongodb://localhost/listit',
-  test: 'mongodb://localhost/listit'
+  test: 'mongodb://localhost/listit-test'
 };
 
 config.serverPORT = {

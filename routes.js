@@ -42,10 +42,25 @@ router.get('/', function(req, res){
 	res.send('Pleas use api ...');
 });
 
+router.post('/employees/signup', function(req, res){
+	//get post data
+	var employee = req.body;
+	console.log(employee);
+	Employee.addEmployee(employee, function(err, employee){
+		if(err){
+			res.json(err);
+		}
+		var secret = req.app.get('jwtTokenSecret');
+		jwtauth.generateToken(secret,employee,function(response_token){
+			res.status(200);
+			return res.json(response_token);
+		});
+		//res.json(employee);
+	});
+});
+
 router.post('/employees/login', function(req, res){
-
 	passportAuthenticateUser(req, res);
-
 });
 
 
