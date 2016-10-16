@@ -1,59 +1,12 @@
 
 [0m[0m
 [0m  listit-backend rest api server[0m
-{ token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ODAyNDYxMTM1MWI2ODY1MDllNjI2ZTciLCJleHAiOjE0NzcxNDg4MTc1NTN9.ZXkhDBuXVm2dRMTQqAR55_3rHEuj1dcZ6dA6JI6V9IA',
-  expires: 1477148817553,
-  user: 
-   { __v: 0,
-     first_name: 'Sabbir',
-     last_name: 'Rahman',
-     address: '91 Ruten',
-     city_name: 'Copenhagen',
-     post_code: 2700,
-     email: 'sakib3@gmail.com',
-     mobile: 712345678,
-     password: '$2a$10$kP47IOGqV.UFkko5s7EAwOeHDMiOPHvP7eOjZYV/F3mHEXmTYB54.',
-     _id: '58024611351b686509e626e7',
-     companies: [],
-     updatedAt: '2016-10-15T15:06:57.272Z',
-     createdAt: '2016-10-15T15:06:57.272Z',
-     confirmed: true } }
-[2K[0G  [32m  ✓[0m[90m should create an employee[0m[31m (369ms)[0m
-{ token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI1ODAyNDYxMTM1MWI2ODY1MDllNjI2ZTciLCJleHAiOjE0NzcxNDg4MTc4Mjh9.Gmj-dIL7_m4r4Xl7TDP_v2_0z0Bylmjk6WmMd1fCT5Y',
-  expires: 1477148817828,
-  user: 
-   { _id: '58024611351b686509e626e7',
-     first_name: 'Sabbir',
-     last_name: 'Rahman',
-     address: '91 Ruten',
-     city_name: 'Copenhagen',
-     post_code: 2700,
-     email: 'sakib3@gmail.com',
-     mobile: 712345678,
-     password: '$2a$10$kP47IOGqV.UFkko5s7EAwOeHDMiOPHvP7eOjZYV/F3mHEXmTYB54.',
-     __v: 0,
-     companies: [],
-     updatedAt: '2016-10-15T15:06:57.272Z',
-     createdAt: '2016-10-15T15:06:57.272Z',
-     confirmed: true } }
-[2K[0G  [32m  ✓[0m[90m should login as an employee[0m[31m (256ms)[0m
+[2K[0G  [32m  ✓[0m[90m should create an employee[0m[31m (367ms)[0m
+[2K[0G  [32m  ✓[0m[90m should login as an employee[0m[31m (278ms)[0m
 [2K[0G  [32m  ✓[0m[90m should decode user if we post token[0m
-[ { _id: '58024611351b686509e626e7',
-    first_name: 'Sabbir',
-    last_name: 'Rahman',
-    address: '91 Ruten',
-    city_name: 'Copenhagen',
-    post_code: 2700,
-    email: 'sakib3@gmail.com',
-    mobile: 712345678,
-    password: '$2a$10$kP47IOGqV.UFkko5s7EAwOeHDMiOPHvP7eOjZYV/F3mHEXmTYB54.',
-    __v: 0,
-    companies: [],
-    updatedAt: '2016-10-15T15:06:57.272Z',
-    createdAt: '2016-10-15T15:06:57.272Z',
-    confirmed: true } ]
 [2K[0G  [32m  ✓[0m[90m should see employees[0m
+[2K[0G  [32m  ✓[0m[90m should login as an admin[0m[31m (261ms)[0m
 
 
-[92m [0m[32m 4 passing[0m[90m (650ms)[0m
+[92m [0m[32m 5 passing[0m[90m (938ms)[0m
 

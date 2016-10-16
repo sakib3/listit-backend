@@ -45,7 +45,6 @@ router.get('/', function(req, res){
 router.post('/employees/signup', function(req, res){
 	//get post data
 	var employee = req.body;
-	console.log(employee);
 	Employee.addEmployee(employee, function(err, employee){
 		if(err){
 			res.json(err);
@@ -63,6 +62,9 @@ router.post('/employees/login', function(req, res){
 	passportAuthenticateUser(req, res);
 });
 
+router.post('/admin/login', function(req, res){
+	passportAuthenticateUser(req, res);
+});
 
 router.all(/^\/api\/((?!employees).)*$/,jwtauth.decodeToken);
 
@@ -79,7 +81,6 @@ router.get('/api/employees', policy.accessOnlyIfFoundInUsersList, function(req, 
 router.post('/api/employees', function(req, res){
 	//get post data
 	var employee = req.body;
-	console.log(employee);
 	Employee.addEmployee(employee, function(err, employee){
 		if(err){
 			res.json(err);
@@ -133,7 +134,8 @@ router.get('/api/products', function(req, res){
 });
 
 function passportAuthenticateUser(req, res){
-	passport.authenticate('local', function(err, user, info) {
+	var strategy = req.url.match(/employees/g)=='employees' ? 'local' : 'local-admin';
+	passport.authenticate(strategy, function(err, user, info) {
 		if (err) { return next(err); }
 
 		if (!user) {
