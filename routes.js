@@ -23,16 +23,6 @@ mongoose.connect(config.mongoURI[process.env.NODE_ENV], function(err, res) {
   }
 });
 
-var db = mongoose.connection;
-
-// <<<<< Test Perpose Only -----
-router.post('/employees/chkauth', jwtauth.decodeToken, function(req, res){
-
-	return res.send(req._currentIdentifierFromToken);
-
-});
-//       Test Perpose Only >>>>>
-
 router.use(function (req,res,next) {
   console.log("/" + req.method);
   next();
@@ -40,6 +30,14 @@ router.use(function (req,res,next) {
 
 router.get('/', function(req, res){
 	res.send('Pleas use api ...');
+});
+
+router.post('/admin/login', function(req, res){
+	passportAuthenticateUser(req, res);
+});
+
+router.post('/employees/login', function(req, res){
+	passportAuthenticateUser(req, res);
 });
 
 router.post('/employees/signup', function(req, res){
@@ -54,16 +52,7 @@ router.post('/employees/signup', function(req, res){
 			res.status(200);
 			return res.json(response_token);
 		});
-		//res.json(employee);
 	});
-});
-
-router.post('/employees/login', function(req, res){
-	passportAuthenticateUser(req, res);
-});
-
-router.post('/admin/login', function(req, res){
-	passportAuthenticateUser(req, res);
 });
 
 router.all(/^\/api\/((?!employees).)*$/,jwtauth.decodeToken);
@@ -89,20 +78,26 @@ router.post('/api/employees', function(req, res){
 	});
 });
 
-
-router.get('/api/employees/login', isLoggedIn, function(req, res){
-
-	res.json({'message': 'user is LoggedIn'});
-
-
-});
-
 router.get('/api/employees/:_id', function(req, res){
 	Employee.getEmployeeById(req.params._id,function(err, employee){
 		if(err){
 			res.json(err);
 		}
 		res.json(employee);
+	});
+});
+
+router.get('/api/employees/login', isLoggedIn, function(req, res){
+	res.json({'message': 'user is LoggedIn'});
+});
+
+router.post('/api/companies', policy.accessOnlyIfFoundInAdminList, function(req, res){
+	var company = req.body;
+	Company.addCompany(company, function(err, company){
+		if(err){
+			res.json(err);
+		}
+		res.json({company:company});
 	});
 });
 
@@ -115,6 +110,15 @@ router.get('/api/companies', function(req, res){
 	});
 });
 
+router.get('/api/products', function(req, res){
+	Product.getProducts(function(err, products){
+		if(err){
+			res.json(err);
+		}
+		res.json(products);
+	});
+});
+
 router.get('/api/orders', function(req, res){
 	Order.getOrders(function(err, orders){
 		if(err){
@@ -124,14 +128,14 @@ router.get('/api/orders', function(req, res){
 	});
 });
 
-router.get('/api/products', function(req, res){
-	Product.getProducts(function(err, products){
-		if(err){
-			res.json(err);
-		}
-		res.json(products);
-	});
+
+// <<<<< Test Perpose Only -----
+router.post('/employees/chkauth', jwtauth.decodeToken, function(req, res){
+
+	return res.send(req._currentIdentifierFromToken);
+
 });
+//       Test Perpose Only >>>>>
 
 function passportAuthenticateUser(req, res){
 	var strategy = req.url.match(/employees/g)=='employees' ? 'local' : 'local-admin';

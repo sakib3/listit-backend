@@ -24,3 +24,7 @@ var Company = module.exports = mongoose.model('Company', companySchema, 'company
 module.exports.getCompanies = function(callback, limit){
       Company.find(callback).limit(limit);
 }
+//add Company
+module.exports.addCompany = function(company, callback){
+	Company.create(company, callback);
+}

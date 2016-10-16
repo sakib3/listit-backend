@@ -1,12 +1,29 @@
 
 [0m[0m
 [0m  listit-backend rest api server[0m
-[2K[0G  [32m  ✓[0m[90m should create an employee[0m[31m (367ms)[0m
-[2K[0G  [32m  ✓[0m[90m should login as an employee[0m[31m (278ms)[0m
-[2K[0G  [32m  ✓[0m[90m should decode user if we post token[0m
+[2K[0G  [32m  ✓[0m[90m should create an employee[0m[31m (353ms)[0m
+[2K[0G  [32m  ✓[0m[90m should login as an employee[0m[31m (268ms)[0m
 [2K[0G  [32m  ✓[0m[90m should see employees[0m
-[2K[0G  [32m  ✓[0m[90m should login as an admin[0m[31m (261ms)[0m
+[2K[0G  [32m  ✓[0m[90m should login as an admin[0m[31m (248ms)[0m
+{ status: 400,
+  message: 'Oops something went wrong',
+  error: 'Access token not found' }
+[2K[0G  [31m  1) should create company[0m
 
 
-[92m [0m[32m 5 passing[0m[90m (938ms)[0m
+[92m [0m[32m 4 passing[0m[90m (907ms)[0m
+[31m  1 failing[0m
+
+[0m  1) listit-backend rest api server should create company:
+[0m[31m     Uncaught TypeError: Cannot read property '_id' of undefined[0m[90m
+    at test/server.spec.js:137:30
+    at Request.callback (node_modules/superagent/lib/node/index.js:591:12)
+    at node_modules/superagent/lib/node/index.js:766:18
+    at IncomingMessage.<anonymous> (node_modules/superagent/lib/node/parsers/json.js:16:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:74:11)
+    at process._tickDomainCallback (internal/process/next_tick.js:122:9)
+  
+[0m
+
 
