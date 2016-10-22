@@ -8,7 +8,8 @@ var orderSchema = Schema({
 	products: [{ type: Schema.Types.ObjectId, ref: 'product' }],
 	order_date: { type: Date, default: Date.now },
   	delivery_date: Date,
-  	status: { type: Boolean, default: false,index: true }
+  	status: { type: Boolean, default: false,index: true },
+  	quantity: { type: Number, default: 0}
 });
 
 var Order = module.exports = mongoose.model('Order', orderSchema, 'order');
