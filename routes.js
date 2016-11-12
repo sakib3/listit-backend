@@ -5,6 +5,7 @@ var express = require('express'),
 var config = require('./_config');
 //var jwtauth = require('./jwtauth.js');
 
+var mongo_uri = process.env.NODE_ENV == 'production' ? process.env.DB_URL : config.mongoURI[process.env.NODE_ENV];
 Employee = require('./models/employee');
 Company = require('./models/company');
 Order = require('./models/order');
@@ -15,7 +16,7 @@ var jwtauth = require('./middlewares/jwtauth'),
 
 
 // connect to Mongoose
-mongoose.connect(config.mongoURI[process.env.NODE_ENV], function(err, res) {
+mongoose.connect(mongo_uri , function(err, res) {
   if(err) {
     console.log('Error connecting to the database. ' + err);
   } else {

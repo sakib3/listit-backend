@@ -5,11 +5,11 @@ var mongoose = require('mongoose'),
 var orderSchema = Schema({
 	company: { type: Schema.Types.ObjectId, ref: 'company' },
 	employee: { type: Schema.Types.ObjectId, ref: 'employee' },
-	products: [{ type: Schema.Types.ObjectId, ref: 'product' }],
+	products: [p_id:{ type: Schema.Types.ObjectId, ref: 'product', index: true },
+			quantity: { type: Number, default: 0}],
 	order_date: { type: Date, default: Date.now },
   	delivery_date: Date,
-  	status: { type: Boolean, default: false,index: true },
-  	quantity: { type: Number, default: 0}
+  	status: { type: Boolean, default: false,index: true }
 });
 
 var Order = module.exports = mongoose.model('Order', orderSchema, 'order');
