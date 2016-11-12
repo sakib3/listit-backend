@@ -18,9 +18,9 @@ var jwtauth = require('./middlewares/jwtauth'),
 // connect to Mongoose
 mongoose.connect(mongo_uri , function(err, res) {
   if(err) {
-    console.log('Error connecting to the database. ' + err);
+    console.log('Error connecting to the database url : '+ mongo_uri + err);
   } else {
-    console.log('Connected to Database: ' + config.mongoURI[process.env.NODE_ENV]);
+    console.log('Connected to Database: ' + mongo_uri);
   }
 });
 
