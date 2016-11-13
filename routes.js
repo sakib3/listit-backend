@@ -145,7 +145,7 @@ function passportAuthenticateUser(req, res){
 
 		if (!user) {
 			res.status(403);
-			return res.send({message: info.message});
+			return res.send({message: 'user not found!'});
 		}
 
 		var secret = req.app.get('jwtTokenSecret');
