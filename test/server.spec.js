@@ -89,6 +89,19 @@ describe('listit-backend rest api server 2', function(){
         expect(res.body.token).not.to.eql(null)
         done()
       })
+  })  
+
+  it('should not login as an employee if not found', function(done){
+    superagent.post(server_url+'/employees/login')
+      .send({
+          email: 'invaliduser@invalid.com',
+          password: user.password
+      })
+      .end(function(e, res){
+        expect(e).not.to.eql(null)
+        expect(res.body.message).to.eql('user not found!')
+        done()
+      })
   })
 
 //test perpose
