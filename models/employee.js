@@ -10,7 +10,17 @@ var employeeSchema = Schema({
 	address: String,
 	city_name: String,
 	post_code: Number,
-	email: String,
+	email: { 
+			type: String,
+			validate: {
+	          	validator: function(v, cb) {
+	            Employee.find({email: v}, function(err,docs){
+	               cb(docs.length == 0);
+	            });
+	        },
+          	message: 'Employee already exists!'
+        } 
+    },
 	mobile: Number,
 	password: String,
 	confirmed: { type: Boolean, default: true,index: true },

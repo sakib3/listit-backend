@@ -6,7 +6,7 @@ var superagent = require('superagent'),
 var port = config.serverPORT[process.env.NODE_ENV];
 var server_url = 'http://localhost:'+port;
 
-describe('listit-backend rest api server', function(){
+describe('listit-backend rest api server 2', function(){
   var user = {
     id : null,
     token : null,
@@ -40,7 +40,7 @@ describe('listit-backend rest api server', function(){
     address:"Torshamnsgatan 21",
     password:"654321"
   }
-
+  
   it('should create an employee', function(done){
     superagent.post(server_url+'/employees/signup')
       .send({
@@ -56,9 +56,21 @@ describe('listit-backend rest api server', function(){
       .end(function(e, res){
         user.id = res.body.user._id
         user.token = res.body.token
-
         expect(e).to.eql(null)
         expect(user.token).not.to.eql(null)
+        done()
+      })
+  })
+  
+  it('should return error if re-create an employee', function(done){
+    superagent.post(server_url+'/employees/signup')
+      .send({  
+        email: user.email,
+        password: user.password
+      })
+      .end(function(e, res){
+        expect(e).not.to.eql(null)
+        expect(res.body.message).to.eql('Employee validation failed')
         done()
       })
   })
@@ -132,7 +144,7 @@ describe('listit-backend rest api server', function(){
         password:company.password
       })
       .end(function(e, res){
-        console.log(res.body)
+        //console.log(res.body)
         expect(e).to.eql(null)
         id = res.body.company._id
         done()

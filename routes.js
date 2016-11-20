@@ -46,7 +46,8 @@ router.post('/employees/signup', function(req, res){
 	var employee = req.body;
 	Employee.addEmployee(employee, function(err, employee){
 		if(err){
-			res.json(err);
+			res.status(404);
+			return res.json({'message': err.errmsg || err.message ||'Error occured!'});
 		}
 		var secret = req.app.get('jwtTokenSecret');
 		jwtauth.generateToken(secret,employee,function(response_token){
